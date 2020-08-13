@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="mxl__container">
+  <view class="mxl__userinfo" aria-hidden="true">
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="mxl__userinfo__avatar__btn"
+       size="default"><image class="mxl__avatarUrl__img" src="{{avatarUrl}}"></image></button>
+  </view>
+  <navigator open-type="navigate" url="/pages/nav/nav" class="mxl__start__btn" aria-label='启动盲小鹿' aria-role='button'>开始使用盲小鹿</navigator>
+</view>
+<view class="mxl__footer" aria-label='小鹿使用说明：启动小鹿后，请允许小鹿获取后置摄像头权限，小鹿通过实时AI扫描后置镜头的内容，当识别到盲道后，会进行语音提醒矫正你的方位！'  bindtap="help">beta1.0.0 by iwh</view>
+

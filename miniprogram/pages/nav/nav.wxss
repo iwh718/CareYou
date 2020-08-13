@@ -1,0 +1,64 @@
+/* pages/nav/nav.wxss */
+page {
+    background-color: #131212;
+  }
+.camera{
+    width: 100%;
+    height: 300px;
+}
+image{
+    width: 100%;
+    margin-top: 20rpx;
+    
+}
+button{
+    background-color: #007aff;
+    color:#fff;
+    border-radius: 0;
+    white-space: nowrap;
+    text-align: center;
+   
+}
+.mlx__footer{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.mlx__footer image{
+    width: 100%;
+    
+}
+.mlx__float__mask__preview{
+    position: fixed;
+    border:1px solid #1260ff;
+    left:0;
+    width: 20vw;
+    top:0
+}
+.mlx__float__preview{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: auto;
+    width: 20vw;
+   
+}
+.mlx__float__mask{
+    position: fixed;
+    border:1px solid #1260ff;
+}
+.mxl__controls{
+    display: flex;
+    width: 100%;
+
+}
+
+.mxl__float{
+    z-index: 99999999!important;
+    position:fixed;
+    bottom: 5%;
+    left: 0;
+   
+    width: 100%;
+
+}
