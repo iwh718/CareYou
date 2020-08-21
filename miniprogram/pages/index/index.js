@@ -1,96 +1,40 @@
-//index.js
-const app = getApp()
-
+const app = getApp();
+let cloudPath = ((d,type) => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}/${Math.random() * 10000}.${type}`);
 Page({
-  data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: ''
+  data: {},
+  about() {
+    wx.showModal({
+      title: '盲小鹿',
+      content: "一个盲道识别AI小程序，识别率根据盲道图片的积累会越来越高，现阶段为了减少不必要的资源损耗，暂时不开放实时识别。"
+    })
   },
-
-  onLoad: function() {
-   
-
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
+  join() {
+    wx.showModal({
+      title: '关于盲小鹿',
+      content: "点击确定去分享盲道实景图片，帮助提升AI识别准确度,开发者审核后将参与盲道识别训练，谢谢。",
+      async success(e) {
+        if (e.confirm) {
+          wx.chooseImage({
+            count: 10,
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            async success(res) {
+              const tempFilePaths = res.tempFilePaths;
+              let lo = wx.showLoading({title: '上传中',});
+              for (let filePath of tempFilePaths) {
+                //上传到数据库
+                await wx.cloud.uploadFile({ cloudPath:cloudPath(new Date,filePath.slice(-4)),filePath});
+              }
+              wx.hideLoading(lo);
+              wx.showToast({
+                title: '上传完成',
+                icon: 'none'
+              });
             }
           })
         }
       }
-    })
+    });
   },
-
-  onGetUserInfo: function(e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  
-
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
-  }
-
+  ...app.share
 })

@@ -8,5 +8,16 @@ App({
         env: 'mangxiaolu001',
       })
     }
+  },
+
+  share: {
+    onAddToFavorites(){return this.shareConfig;},
+    onShareAppMessage(){return {...this.shareConfig,path: '/pages/index/index'}},
+    onShareTimeline(){return this.shareConfig;},
+    shareConfig: {
+      title: '盲小鹿，AI实时识别盲道位置。',
+      query: '/pages/index/index',
+      imageUrl:'cloud://mangxiaolu001.6d61-mangxiaolu001-1302867071/voice/timg.jpeg'
+    },
   }
 })

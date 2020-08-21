@@ -1,14 +1,15 @@
-<camera mode="normal" class="camera" frame-size="high" resolution="large" device-position="back" bindinitdone="initScan"
-    style="height:{{100}}vh"></camera>
+<camera aria-hidden="{{true}}" mode="normal" class="camera" frame-size="small" resolution="low" device-position="back" bindinitdone="initScan" style="height:{{100}}vh"></camera>
 <cover-view class="mxl__float">
     <cover-view class="mxl__controls">
-        <button  style="width:20%;border-radius:0" bindtap="userScan">选取</button>
-        <button style="width:20%;border-radius:0" bindtap="printScan">截取</button>
-        <button style="width:20%;border-radius:0" bindtap="initScan">实时</button>
+        <button aria-hidden="true" aria-label='选择相册图片' aria-role='button' style="width:20%;" bindtap="userScan">选取</button>
+        <button aria-hidden="true" aria-label='识别当前取景器' aria-role='button' style="width:20%;" bindtap="printScan">取景器</button>
+        <button aria-label='开始实时AI识别' aria-role='button' style="width:40%;" bindtap="initScan">实时【暂未开放】</button>
     </cover-view>
-    <cover-view  style="text-align:center;margin-top:10px;color:#fff">盲道检测结果：{{checkTips}}
+    <cover-view aria-label="盲道检测结果：{{checkTips}}" style="text-align:center;margin-top:10px;color:#fff">盲道检测结果：{{checkTips}}
     </cover-view>
 </cover-view>
-<cover-view class="mlx__float__mask"
-        style="height:{{checkRes[0].location.height}}px;width:{{checkRes[0].location.width}}px;left:{{checkRes[0].location.left}}px;top:{{checkRes[0].location.top}}px" ></cover-view>
-<cover-image src="{{photo}}" mode='widthFix' class="mlx__float__preview"></cover-image>
+<!-- 框选 调整方位 -->
+<!-- <cover-view aria-hidden="{{true}}" class="mlx__float__mask"
+    style="height:{{checkRes[0].location.height}}px;width:{{checkRes[0].location.width}}px;left:{{checkRes[0].location.left}}px;top:{{checkRes[0].location.top}}px">
+</cover-view> -->
+<cover-image aria-hidden="{{true}}" src="{{photo}}" mode='widthFix' class="mlx__float__preview"></cover-image>
