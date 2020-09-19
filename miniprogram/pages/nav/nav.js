@@ -7,7 +7,6 @@ innerAudioContext.onPlay((e) => console.log(e));
 innerAudioContext.src = "cloud://mangxiaolu001.6d61-mangxiaolu001-1302867071/voice/find.mp3";
 innerAudioContext.src = "cloud://mangxiaolu001.6d61-mangxiaolu001-1302867071/voice/notFind.mp3";
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -37,12 +36,10 @@ Page({
     this.setData({ sys })
   },
   printScan() {
-    // console.log('手动识别！')
     const ctx = wx.createCameraContext()
     ctx.takePhoto({
       quality: 'normal',
       success: (res) => {
-        // console.log(res)
         this.imgBase64(res.tempImagePath)
         this.setData({
           photo: res.tempImagePath
@@ -105,7 +102,7 @@ Page({
                 photo: src,
                 checkRes: r.result.data.results,
                 isFind: true,
-                checkTips: '发现盲道！'
+                checkTips: '发现盲道'+score+'%'
               });
             }
           } else {
@@ -117,7 +114,7 @@ Page({
         } catch (e) {
           // console.log(e)
           wx.showToast({
-            title: '图片过大,请重新获取！',
+            title: '图片过大',
             icon: "none"
           });
           _this.setData({ isFind: false, checkTips: '未发现！' })

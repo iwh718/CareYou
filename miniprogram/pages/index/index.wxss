@@ -1,0 +1,4 @@
+[data-avatar]{border-radius:200rpx;width: 400rpx;height:400rpx;border: 1px solid #007aff;margin: 0 auto;display: block;}
+[data-start]{color: #007aff;margin-top: 20px;font-weight: bold;text-align: center;}
+[data-about]{text-align:center;margin-top:10px;color:gray}
+[data-footer]{margin-top: 20px;color: #fff;opacity: .4;text-align: center;}
