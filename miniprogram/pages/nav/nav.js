@@ -76,7 +76,7 @@ Page({
         //上传
         try {
           let r = await _this.getImgCheck(base64);
-          // console.log(r.result)
+          console.log(r.result)
           if (r.result.status === 200 && !r.result.data.err_code) {
             if (r.result.data.results.length === 0) {
               // console.log('未发现盲道')
@@ -112,7 +112,7 @@ Page({
             })
           }
         } catch (e) {
-          // console.log(e)
+          console.log(e)
           wx.showToast({
             title: '图片过大',
             icon: "none"
